@@ -38,7 +38,6 @@ function Login() {
 			const response = await signInWithEmailAndPassword(auth, email, password);
 			const user = response.user;
 			console.log(user)
-			// dispatch(addToStore(user))
 			navigate('/browse')
 		} catch (e) {
 			setErrorMessage(e.code + " - " + e.message)
