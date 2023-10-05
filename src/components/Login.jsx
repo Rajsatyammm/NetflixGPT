@@ -1,6 +1,9 @@
 import { useState, useRef } from "react"
 import Header from "./Header"
 import { validate } from "../utils/validate"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../utils/firebase'
+import { useNavigate } from "react-router-dom"
 
 function Login() {
 
@@ -9,14 +12,56 @@ function Login() {
 
 	const email = useRef(null)
 	const password = useRef(null)
+	const navigate = useNavigate()
 
 	function changeHandler() {
 		setIsSignInFrom(!isSignInForm)
 	}
 
+	// Creating User (SignUp)
+	async function createUser(auth, email, password) {
+		try {
+			const response = await createUserWithEmailAndPassword(auth, email, password)
+			const user = response.user
+			console.log(user)
+
+		} catch (e) {
+			console.log(e.message)
+			setErrorMessage(e.code + e.message)
+		}
+
+	}
+
+	// Sign Up User
+	async function signInUser(auth, email, password) {
+		try {
+			const response = await signInWithEmailAndPassword(auth, email, password);
+			const user = response.user;
+			console.log(user)
+			// dispatch(addToStore(user))
+			navigate('/browse')
+		} catch (e) {
+			setErrorMessage(e.code + " - " + e.message)
+		}
+	}
+
+
 	function submitFormHandler() {
-		const result = validate(email?.current?.value, password?.current?.value)
-		setErrorMessage(result)
+		const message = validate(email.current.value, password.current.value)
+		setErrorMessage(message)
+
+		if (message || !email.current.value || !password.current.value) return
+
+		// sign in sign up logic
+		if (!isSignInForm) {
+			// Sign Up logic
+			createUser(auth, email.current.value, password.current.value)
+		}
+
+		else {
+			// Sign in logic
+			signInUser(auth, email.current.value, password.current.value)
+		}
 	}
 
 	return (
