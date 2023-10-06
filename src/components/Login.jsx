@@ -1,18 +1,21 @@
 import { useState, useRef } from "react"
 import Header from "./Header"
 import { validate } from "../utils/validate"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '../utils/firebase'
-import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { addUser } from "../store/userSlice"
+import { NETFLIX_BG_IMAGE } from "../utils/constants"
 
 function Login() {
 
 	const [isSignInForm, setIsSignInFrom] = useState(true)
 	const [errorMessage, setErrorMessage] = useState(null)
 
+	const name = useRef(null)
 	const email = useRef(null)
 	const password = useRef(null)
-	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	function changeHandler() {
 		setIsSignInFrom(!isSignInForm)
@@ -23,7 +26,17 @@ function Login() {
 		try {
 			const response = await createUserWithEmailAndPassword(auth, email, password)
 			const user = response.user
-			console.log(user)
+
+			await updateProfile(user, {
+				displayName: name.current.value,
+				photoURL: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+			})
+
+			const { uid, email, displayName, photoURL } = auth.currentUser
+			dispatch(addUser({
+				uid: uid, email: email,
+				displayName: displayName, photoURL: photoURL
+			}))
 
 		} catch (e) {
 			console.log(e.message)
@@ -38,7 +51,6 @@ function Login() {
 			const response = await signInWithEmailAndPassword(auth, email, password);
 			const user = response.user;
 			console.log(user)
-			navigate('/browse')
 		} catch (e) {
 			setErrorMessage(e.code + " - " + e.message)
 		}
@@ -63,6 +75,7 @@ function Login() {
 		}
 	}
 
+
 	return (
 		<div>
 			<Header />
@@ -70,7 +83,7 @@ function Login() {
 			<div className="absolute">
 				<img
 					className="object-cover"
-					src="https://assets.nflxext.com/ffe/siteui/vlv3/893a42ad-6a39-43c2-bbc1-a951ec64ed6d/1d86e0ac-428c-4dfa-9810-5251dbf446f8/IN-en-20231002-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+					src={NETFLIX_BG_IMAGE}
 					alt="background-img" />
 			</div>
 
@@ -85,6 +98,7 @@ function Login() {
 					!isSignInForm &&
 					<input
 						type="text"
+						ref={name}
 						placeholder="Full Name"
 						className="p-2 mt-2 w-full rounded-md bg-[#333]"
 					/>
@@ -113,9 +127,9 @@ function Login() {
 				</button>
 
 				<div
-					className="w-full mb-5"
+					className="w-full mb-5 cursor-pointer"
 					onClick={changeHandler}>
-					{isSignInForm ? "New to Netflix? Sign up now" : "Already registered? Sign In now"}
+					{isSignInForm ? `New to Netflix? Sign up now` : `Already registered? Sign In now`}
 				</div>
 
 			</form>
