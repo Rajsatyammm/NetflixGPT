@@ -6,7 +6,7 @@ export const TMDB_API_OPTIONS = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YzlmMmY0ZTBlYTU1YWRhMDFhNzI4NWU2MWNmMzBiMCIsInN1YiI6IjY1MWY4Y2VhYzUwYWQyMDEyYzFjMWU2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ea9MsZIGgtwOcjeDmEsh96m81XRia2nrOZ-3AJiAUyI'
+        Authorization: import.meta.env.VITE_TMDB_API_KEY
     }
 }
 
