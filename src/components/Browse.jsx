@@ -18,7 +18,7 @@ function Browse() {
 	useUpcomingMovies()
 
 	return (
-		<div className="h-auto">
+		<div className="">
 			<Header />
 			{
 				!isGPTTabOpen

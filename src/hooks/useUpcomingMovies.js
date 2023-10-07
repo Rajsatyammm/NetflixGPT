@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import { TMDB_API_OPTIONS, UPCOMING_MOVIES } from "../utils/constants"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addUpcomingMovies } from "../store/movieSlice"
 
 const useUpcomingMovies = () => {
 
     const dispatch = useDispatch()
-
+    const upcomingMovies = useSelector(store => store.movies.upcomingMovies)
+    
     useEffect(() => {
         const getUpcomingMovies = async () => {
             const response = await fetch(
@@ -18,8 +19,8 @@ const useUpcomingMovies = () => {
             dispatch(addUpcomingMovies(json.results))
         }
 
-        getUpcomingMovies()
-    }, [dispatch])
+        !upcomingMovies && getUpcomingMovies()
+    }, [dispatch, upcomingMovies])
 }
 
 export default useUpcomingMovies

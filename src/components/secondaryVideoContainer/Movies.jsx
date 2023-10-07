@@ -4,7 +4,7 @@ import { TMDB_CDN_IMG } from "../../utils/constants"
 
 // eslint-disable-next-line react/prop-types
 const Movies = ({ imgUrl }) => {
-
+    if(!imgUrl) return 
     return (
         <div className="w-40 h-40">
             {/* <p className="absolute text-sm">{title}</p> */}
