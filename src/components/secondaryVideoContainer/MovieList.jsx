@@ -20,6 +20,7 @@ const MovieList = ({ title, movies }) => {
                                 imgUrl={movie.poster_path} />
                         ))
                     }
+                    console.log(movies[0].id)
                 </div>
             </div>
         </div>

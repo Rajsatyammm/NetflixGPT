@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import { TMDB_CDN_IMG } from "../utils/constants"
+import { TMDB_CDN_IMG } from "../../utils/constants"
 
 // eslint-disable-next-line react/prop-types
 const Movies = ({ imgUrl }) => {

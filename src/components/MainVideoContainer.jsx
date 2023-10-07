@@ -1,10 +1,10 @@
 // import React from 'react'
 
 import { useSelector } from "react-redux"
-import VideoTitle from "./VideoTitle"
-import VideoBackground from "./VideoBackground"
+import VideoTitle from "./mainVideoContainer/VideoTitle"
+import VideoBackground from "./mainVideoContainer/VideoBackground"
 
-function MainContainer() {
+function MainVideoContainer() {
 
 	// subscribing to the store
 	const movies = useSelector(store => store.movies?.nowPlayingMovies)
@@ -30,4 +30,4 @@ function MainContainer() {
 	)
 }
 
-export default MainContainer
+export default MainVideoContainer

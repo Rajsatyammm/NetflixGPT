@@ -3,9 +3,10 @@ import Header from "./Header"
 import { validate } from "../utils/validate"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '../utils/firebase'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addUser } from "../store/userSlice"
 import { NETFLIX_BG_IMAGE } from "../utils/constants"
+import lang from "../utils/languageConstants"
 
 function Login() {
 
@@ -16,6 +17,8 @@ function Login() {
 	const email = useRef(null)
 	const password = useRef(null)
 	const dispatch = useDispatch()
+
+	const currentLanguage = useSelector(store => store.config.currLanguage)
 
 	function changeHandler() {
 		setIsSignInFrom(!isSignInForm)
@@ -91,7 +94,7 @@ function Login() {
 				onSubmit={(e) => e.preventDefault()}
 				className="absolute flex flex-col bg-black w-5/12 h-auto px-14 gap-4 mx-auto right-0 left-0 my-36 text-white bg-opacity-80 rounded-md">
 				<h1 className="text-3xl font-bold mt-8">
-					{isSignInForm ? "Sign In" : "Sign Up"}
+					{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
 				</h1>
 
 				{
@@ -99,7 +102,7 @@ function Login() {
 					<input
 						type="text"
 						ref={name}
-						placeholder="Full Name"
+						placeholder={lang[currentLanguage].fullNamePlaceholder}
 						className="p-2 mt-2 w-full rounded-md bg-[#333]"
 					/>
 				}
@@ -107,14 +110,14 @@ function Login() {
 				<input
 					type="text"
 					ref={email}
-					placeholder="Email Address"
+					placeholder={lang[currentLanguage].emailAddressPlaceholder}
 					className="p-2 mt-2 w-full rounded-md bg-[#333]"
 				/>
 
 				<input
 					type="password"
 					ref={password}
-					placeholder="Password"
+					placeholder={lang[currentLanguage].passwordPlaceholder}
 					className="mt-2 p-2 w-full rounded-md bg-[#333]"
 				/>
 
@@ -123,13 +126,13 @@ function Login() {
 				<button
 					className="p-4 mt-4 bg-red-600 w-full rounded-md"
 					onClick={submitFormHandler}>
-					{isSignInForm ? "Sign In" : "Sign Up"}
+					{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
 				</button>
 
 				<div
 					className="w-full mb-5 cursor-pointer"
 					onClick={changeHandler}>
-					{isSignInForm ? `New to Netflix? Sign up now` : `Already registered? Sign In now`}
+					{isSignInForm ? lang[currentLanguage].newToNetflixButton : lang[currentLanguage].oldToNetflixButton}
 				</div>
 
 			</form>

@@ -1,9 +1,9 @@
 // import React from 'react'
 
 import { useSelector } from "react-redux"
-import MovieList from "./MovieList"
+import MovieList from "./secondaryVideoContainer/MovieList"
 
-function SecondaryContainer() {
+function SecondaryVideoContainer() {
 
 	const movies = useSelector(store => store.movies)
 
@@ -19,4 +19,4 @@ function SecondaryContainer() {
 	)
 }
 
-export default SecondaryContainer
+export default SecondaryVideoContainer

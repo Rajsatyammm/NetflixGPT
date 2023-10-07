@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { YOUTUBE_SEARCH_VIDEO_URL } from '../utils/constants'
-import useMovieTrailer from "../hooks/useMovieTrailer"
+import { YOUTUBE_SEARCH_VIDEO_URL } from '../../utils/constants'
+import useMovieTrailer from "../../hooks/useMovieTrailer"
 
 // eslint-disable-next-line react/prop-types
 function VideoBackground({ movieId }) {
