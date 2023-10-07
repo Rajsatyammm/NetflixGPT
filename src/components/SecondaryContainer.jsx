@@ -10,8 +10,11 @@ function SecondaryContainer() {
 	if (!movies) return
 
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col bg-black text-white">
 			<MovieList title={"Now Playing"} movies={movies?.nowPlayingMovies} />
+			<MovieList title={"UpComing Movies"} movies={movies?.upcomingMovies} />
+			<MovieList title={"Top Rated"} movies={movies?.topRatedMovies} />
+			<MovieList title={"Popular"} movies={movies?.popularMovies} />
 		</div>
 	)
 }
