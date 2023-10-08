@@ -12,7 +12,7 @@ export const TMDB_API_OPTIONS = {
 
 export const YOUTUBE_SEARCH_VIDEO_URL = "https://www.youtube.com/embed/"
 
-export const TMDB_CDN_IMG = "https://image.tmdb.org/t/p/original"
+export const TMDB_CDN_IMG = "https://image.tmdb.org/t/p/original/"
 
 export const NOW_PLAYING_MOVIES = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
 

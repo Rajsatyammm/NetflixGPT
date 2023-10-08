@@ -112,7 +112,7 @@ function Header() {
                     }
                 </div>
 
-            </div>
+            </div> 
 
 
             {/* for small devices */}

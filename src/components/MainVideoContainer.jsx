@@ -11,8 +11,15 @@ function MainVideoContainer() {
 
 	if (!movies) return;
 
+	const getRandomNumber = (min, max) => {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	// random movie for mail trailer video
+	const randomIdx = getRandomNumber(0, 5)
+
 	// main movie to show on the browse page 
-	const mainMovie = movies[0]
+	const mainMovie = movies[randomIdx]
 
 	// console.log(mainMovie)
 
@@ -25,7 +32,7 @@ function MainVideoContainer() {
 				title={original_title}
 				overview={overview} />
 
-			<VideoBackground movieId={id}/>
+			<VideoBackground movieId={id} />
 		</div>
 	)
 }

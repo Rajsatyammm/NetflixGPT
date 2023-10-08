@@ -1,4 +1,5 @@
 // import React from 'react'
+import { NavLink } from "react-router-dom";
 import Movies from "./Movies"
 
 // eslint-disable-next-line react/prop-types
@@ -14,10 +15,11 @@ const MovieList = ({ title, movies }) => {
                     {
                         // eslint-disable-next-line react/prop-types
                         movies.map((movie) => (
-                            <Movies
-                                key={movie.id}
-                                // title={movie?.original_title}
-                                imgUrl={movie.poster_path} />
+                            <NavLink to={'/movie/' + movie.id} key={movie.id}>
+                                <Movies
+                                    // title={movie?.original_title}
+                                    imgUrl={movie.poster_path} />
+                            </NavLink>
                         ))
                     }
                 </div>

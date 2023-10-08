@@ -51,9 +51,9 @@ function Login() {
 	// Sign Up User
 	async function signInUser(auth, email, password) {
 		try {
-			const response = await signInWithEmailAndPassword(auth, email, password);
-			const user = response.user;
-			console.log(user)
+			// const response = 
+			await signInWithEmailAndPassword(auth, email, password);
+			// const user = response.user;
 		} catch (e) {
 			setErrorMessage(e.code + " - " + e.message)
 		}

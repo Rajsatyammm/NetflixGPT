@@ -1,6 +1,7 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import Browse from "./Browse"
 import Login from "./Login"
+import MovieDetails from "./MovieDetails"
 
 function Body() {
 
@@ -11,17 +12,19 @@ function Body() {
         },
         {
             path: '/browse',
-            element: <Browse />
+            element: <Browse />,
         },
+        {
+            path: '/movie/:id',
+            element: <MovieDetails />
+        }
     ])
-
-    
 
     return (
         <div>
             <RouterProvider router={appRouter}>
                 <Login />
-                <Browse />
+                <Outlet />
             </RouterProvider>
         </div>
     )
