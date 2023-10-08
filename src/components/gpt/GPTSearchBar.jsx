@@ -3,7 +3,7 @@ import lang from "../../utils/languageConstants"
 import { useRef } from "react"
 import openai from "../../utils/openai"
 import { TMDB_API_OPTIONS } from "../../utils/constants"
-import { addGptMovieData } from "../../store/gptSlice"
+import { addGptMovieData, toggleGptVideoSuggestion } from "../../store/gptSlice"
 
 const GPTSearchBar = () => {
 
@@ -22,10 +22,15 @@ const GPTSearchBar = () => {
         return json.results;
     };
 
-    const handleClick = async () => {
-        console.log(inputText.current.value)
+    const handleClick = async (e) => {
+        // console.log(inputText.current.value)
 
+        e.preventDefault()
         if (!inputText.current.value) return;
+
+        dispatch(addGptMovieData({ movieNames: null, movieDetails: null }))
+
+        dispatch(toggleGptVideoSuggestion())
 
         const queryText =
             "Act as a movie Recommendation system and suggest some movies for the query"
@@ -51,7 +56,7 @@ const GPTSearchBar = () => {
 
         // dispatch the data
         dispatch(addGptMovieData({ movieNames: gptMovieNames, movieDetails: movieDetails }))
-
+        dispatch(toggleGptVideoSuggestion())
     }
 
     const currentLanguage = useSelector(store => store.config.currLanguage)
@@ -65,10 +70,10 @@ const GPTSearchBar = () => {
                     type="text"
                     placeholder={lang[currentLanguage].inputBoxPlaceholder}
                 />
-                <p className="p-3 bg-red-600 w-auto h-12 rounded-xl font-bold cursor-pointer"
+                <button className="p-3 bg-red-600 w-auto h-12 rounded-xl font-bold cursor-pointer"
                     onClick={handleClick}>
                     {lang[currentLanguage].searchButton}
-                </p>
+                </button>
             </form>
 
         </div>

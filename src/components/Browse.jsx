@@ -18,7 +18,7 @@ function Browse() {
 	useUpcomingMovies()
 
 	return (
-		<div className="">
+		<div className="max-w-screen w-screen">
 			<Header />
 			{
 				!isGPTTabOpen

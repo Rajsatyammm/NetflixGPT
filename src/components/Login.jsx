@@ -25,9 +25,9 @@ function Login() {
 	}
 
 	// Creating User (SignUp)
-	async function createUser(auth, email, password) {
+	async function createUser(auth, emailId, password) {
 		try {
-			const response = await createUserWithEmailAndPassword(auth, email, password)
+			const response = await createUserWithEmailAndPassword(auth, emailId, password)
 			const user = response.user
 
 			await updateProfile(user, {
@@ -80,62 +80,64 @@ function Login() {
 
 
 	return (
-		<div>
+		<div className="relative">
 			<Header />
 
 			<div className="absolute">
 				<img
-					className="object-cover"
+					className="object-cover w-screen h-screen md:object-fill"
 					src={NETFLIX_BG_IMAGE}
 					alt="background-img" />
 			</div>
 
-			<form
-				onSubmit={(e) => e.preventDefault()}
-				className="absolute flex flex-col bg-black w-5/12 h-auto px-14 gap-4 mx-auto right-0 left-0 my-36 text-white bg-opacity-80 rounded-md">
-				<h1 className="text-3xl font-bold mt-8">
-					{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
-				</h1>
+			<div className="absolute bg-black w-screen h-screen bg-opacity-30">
+				<form
+					onSubmit={(e) => e.preventDefault()}
+					className="absolute flex flex-col bg-black w-[75%] md:w-5/12 h-auto px-14 gap-4 mx-auto right-0 left-0 my-36 text-white rounded-md bg-opacity-80">
+					<h1 className="text-3xl font-bold mt-8">
+						{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
+					</h1>
 
-				{
-					!isSignInForm &&
+					{
+						!isSignInForm &&
+						<input
+							type="text"
+							ref={name}
+							placeholder={lang[currentLanguage].fullNamePlaceholder}
+							className="p-2 mt-2 w-full rounded-md bg-[#333]"
+						/>
+					}
+
 					<input
 						type="text"
-						ref={name}
-						placeholder={lang[currentLanguage].fullNamePlaceholder}
+						ref={email}
+						placeholder={lang[currentLanguage].emailAddressPlaceholder}
 						className="p-2 mt-2 w-full rounded-md bg-[#333]"
 					/>
-				}
 
-				<input
-					type="text"
-					ref={email}
-					placeholder={lang[currentLanguage].emailAddressPlaceholder}
-					className="p-2 mt-2 w-full rounded-md bg-[#333]"
-				/>
+					<input
+						type="password"
+						ref={password}
+						placeholder={lang[currentLanguage].passwordPlaceholder}
+						className="mt-2 p-2 w-full rounded-md bg-[#333]"
+					/>
 
-				<input
-					type="password"
-					ref={password}
-					placeholder={lang[currentLanguage].passwordPlaceholder}
-					className="mt-2 p-2 w-full rounded-md bg-[#333]"
-				/>
+					<p className="text-red-600 font-bold">{errorMessage}</p>
 
-				<p className="text-red-600 font-bold">{errorMessage}</p>
+					<button
+						className="p-4 mt-4 bg-red-600 w-full rounded-md"
+						onClick={submitFormHandler}>
+						{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
+					</button>
 
-				<button
-					className="p-4 mt-4 bg-red-600 w-full rounded-md"
-					onClick={submitFormHandler}>
-					{isSignInForm ? lang[currentLanguage].signInButton : lang[currentLanguage].signUpButton}
-				</button>
+					<div
+						className="w-full mb-5 cursor-pointer"
+						onClick={changeHandler}>
+						{isSignInForm ? lang[currentLanguage].newToNetflixButton : lang[currentLanguage].oldToNetflixButton}
+					</div>
 
-				<div
-					className="w-full mb-5 cursor-pointer"
-					onClick={changeHandler}>
-					{isSignInForm ? lang[currentLanguage].newToNetflixButton : lang[currentLanguage].oldToNetflixButton}
-				</div>
-
-			</form>
+				</form>
+			</div>
 
 		</div>
 	)

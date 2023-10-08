@@ -8,9 +8,9 @@ const MovieList = ({ title, movies }) => {
 
     return (
         <div className="h-auto w-screen">
-            <p className="m-3 text-3xl font-bold">{title}</p>
-            <div className="flex h-72 overflow-x-scroll">
-                <div className="flex gap-2">
+            <p className="mb-3 md:pt-2 text-xl md:text-3xl font-bold">{title}</p>
+            <div className="flex md:h-[16.5rem] overflow-x-scroll">
+                <div className="flex gap-x-0.5 md:gap-2">
                     {
                         // eslint-disable-next-line react/prop-types
                         movies.map((movie) => (

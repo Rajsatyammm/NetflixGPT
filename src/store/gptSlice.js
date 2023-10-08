@@ -5,6 +5,7 @@ const initialState = {
     movieNames: null,
     movieDetails: null,
     isGPTtab: false,
+    isGptVideoSuggestion: false,
 }
 
 const gptSlice = createSlice({
@@ -22,9 +23,12 @@ const gptSlice = createSlice({
             state.movieNames = movieNames;
             state.movieDetails = movieDetails;
         },
+        toggleGptVideoSuggestion: (state) => {
+            state.isGptVideoSuggestion = !state.isGptVideoSuggestion
+        }
     }
 })
 
-export const { toggleClick, setGptTabFalse, addGptMovieData } = gptSlice.actions
+export const { toggleClick, setGptTabFalse, addGptMovieData, toggleGptVideoSuggestion } = gptSlice.actions
 
 export default gptSlice.reducer
