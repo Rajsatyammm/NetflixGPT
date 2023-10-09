@@ -49,9 +49,9 @@ function Header() {
     async function handleSignOut() {
         try {
             await signOut(auth)
-            console.log("SignOut Success")
+            // console.log("SignOut Success")
         } catch (e) {
-            console.log("Error occured while signout")
+            // console.log("Error occured while signout")
         }
     }
 

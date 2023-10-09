@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { addCurrMovieDetails, addCurrMovieTrailer } from "../store/movieSlice"
+import { addCurrMovieDetails, addCurrMovieTrailer, removeCurrMovieDetails, removeCurrMovieTrailer } from "../store/movieSlice"
 import { useDispatch } from "react-redux"
 import { TMDB_API_OPTIONS } from "../utils/constants"
 
@@ -11,34 +11,42 @@ const useFetchMovieDetailsByID = async (id) => {
 
 		const fetchMovieDetailsByID = async () => {
 
+			dispatch(removeCurrMovieDetails())
+			dispatch(removeCurrMovieTrailer())
 			// fetch data 
-			const response = await
-				fetch('https://api.themoviedb.org/3/movie/' + id,
-					TMDB_API_OPTIONS)
+			try {
 
-			// response to json conversion
-			const json = await response.json()
-			
-			// store the data to store
-			dispatch(addCurrMovieDetails(json))
+				const response = await
+					fetch('https://api.themoviedb.org/3/movie/' + id,
+						TMDB_API_OPTIONS)
 
-			// fetching movie trailer
-			const res = await fetch(
-				"https://api.themoviedb.org/3/movie/" + id + "/videos?language=en-US",
-				TMDB_API_OPTIONS
-			)
+				// response to json conversion
+				const json = await response.json()
 
-			// extract results from response.json()
-			const { results } = await res.json()
+				// store the data to store
+				dispatch(addCurrMovieDetails(json))
 
-			// extract all trailer videos
-			const allTrailerVideos = results?.filter((movie) => movie?.type === "Trailer")
+				// fetching movie trailer
+				const res = await fetch(
+					"https://api.themoviedb.org/3/movie/" + id + "/videos?language=en-US",
+					TMDB_API_OPTIONS
+				)
 
-			// get first trailer of the movie
-			const trailerVideo = allTrailerVideos[0]
+				// extract results from response.json()
+				const { results } = await res.json()
 
-			// set the first trailer video to store
-			dispatch(addCurrMovieTrailer(trailerVideo))
+				// extract all trailer videos
+				const allTrailerVideos = results?.filter((movie) => movie?.type === "Trailer")
+
+				// get first trailer of the movie
+				const trailerVideo = allTrailerVideos[0]
+
+				// set the first trailer video to store
+				dispatch(addCurrMovieTrailer(trailerVideo))
+
+			} catch (e) {
+				console.log(e.message)
+			}
 
 		}
 

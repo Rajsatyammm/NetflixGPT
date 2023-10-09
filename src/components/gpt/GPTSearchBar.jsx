@@ -51,8 +51,8 @@ const GPTSearchBar = () => {
         // resolve all the promise
         const movieDetails = await Promise.all(promiseArray)
 
-        console.log("moviename", gptMovieNames)
-        console.log("moviedetails", movieDetails[0])
+        // console.log("moviename", gptMovieNames)
+        // console.log("moviedetails", movieDetails[0])
 
         // dispatch the data
         dispatch(addGptMovieData({ movieNames: gptMovieNames, movieDetails: movieDetails }))

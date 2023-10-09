@@ -13,7 +13,7 @@ const GPTPage = () => {
       </div>
       <div className="fixed -z-10">
         <img className="h-screen w-full fixed object-cover "
-          src={NETFLIX_BG_IMAGE} alt="BG-image" />
+          src={NETFLIX_BG_IMAGE} alt="BG-imagee" />
       </div>
     </div>
   )

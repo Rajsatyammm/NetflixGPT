@@ -6,7 +6,7 @@ export const TMDB_API_OPTIONS = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: import.meta.env.VITE_TMDB_API_KEY
+        Authorization: process.env.REACT_APP_TMDB_API_KEY
     }
 }
 

@@ -42,7 +42,7 @@ function Login() {
 			}))
 
 		} catch (e) {
-			console.log(e.message)
+			// console.log(e.message)
 			setErrorMessage(e.code + e.message)
 		}
 
