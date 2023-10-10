@@ -21,3 +21,7 @@ export const POPULAR_MOVIES = "https://api.themoviedb.org/3/movie/popular?langua
 export const TOP_RATED_MOVIES = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
 
 export const UPCOMING_MOVIES = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
+
+export const TRENDING_TODAY_MOVIES = "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
+
+export const TRENDING_THIS_WEEK_MOVIES = "https://api.themoviedb.org/3/trending/movie/week?language=en-US"

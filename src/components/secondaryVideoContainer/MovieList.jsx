@@ -15,7 +15,7 @@ const MovieList = ({ title, movies }) => {
                     {
                         // eslint-disable-next-line react/prop-types
                         movies.map((movie) => (
-                            <NavLink to={'/movie/' + movie.id} key={movie.id}>
+                            <NavLink to={'/browse/movie/' + movie.id} key={movie.id}>
                                 <Movies
                                     // title={movie?.original_title}
                                     imgUrl={movie.poster_path} />

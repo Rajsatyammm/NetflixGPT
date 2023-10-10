@@ -5,6 +5,8 @@ import GPTPage from "./GPTPage"
 import Header from "./Header"
 import MainVideoContainer from "./MainVideoContainer"
 import SecondaryVideoContainer from "./SecondaryVideoContainer"
+import useTrendingToday from "../hooks/useTrendingTodayMovies"
+import useTrendingThisWeekMovies from "../hooks/useTrendingThisWeekMovies"
 // import { useMemo } from "react"
 
 
@@ -16,6 +18,8 @@ function Browse() {
 	usePopularMovies()
 	useTopRatedMovies()
 	useUpcomingMovies()
+	useTrendingToday()
+	useTrendingThisWeekMovies()
 
 	return (
 		<div className="max-w-screen w-screen">

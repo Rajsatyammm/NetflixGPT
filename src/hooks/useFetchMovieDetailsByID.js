@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { addCurrMovieDetails, addCurrMovieTrailer, removeCurrMovieDetails, removeCurrMovieTrailer } from "../store/movieSlice"
+import { addCurrMovieDetails, addCurrMovieTrailer, addRecommendedMovies, removeCurrMovieDetails, removeCurrMovieTrailer, removeRecommededMovies } from "../store/movieSlice"
 import { useDispatch } from "react-redux"
 import { TMDB_API_OPTIONS } from "../utils/constants"
 
@@ -13,6 +13,7 @@ const useFetchMovieDetailsByID = async (id) => {
 
 			dispatch(removeCurrMovieDetails())
 			dispatch(removeCurrMovieTrailer())
+			dispatch(removeRecommededMovies())
 			// fetch data 
 			try {
 
@@ -43,6 +44,12 @@ const useFetchMovieDetailsByID = async (id) => {
 
 				// set the first trailer video to store
 				dispatch(addCurrMovieTrailer(trailerVideo))
+
+				const recommendMovie = await fetch("https://api.themoviedb.org/3/movie/" + id + "/recommendations", TMDB_API_OPTIONS)
+				const recommendedMoviesData = await recommendMovie.json()
+				// console.log("movieData", jsonn.results)
+				if (!recommendedMoviesData.results) return;
+				dispatch(addRecommendedMovies(recommendedMoviesData.results))
 
 			} catch (e) {
 				console.log(e.message)

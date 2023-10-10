@@ -3,7 +3,7 @@ import lang from "../../utils/languageConstants"
 import { useRef } from "react"
 import openai from "../../utils/openai"
 import { TMDB_API_OPTIONS } from "../../utils/constants"
-import { addGptMovieData, toggleGptVideoSuggestion } from "../../store/gptSlice"
+import { addGptMovieData, setIsLoading, toggleGptVideoSuggestion } from "../../store/gptSlice"
 
 const GPTSearchBar = () => {
 
@@ -25,6 +25,7 @@ const GPTSearchBar = () => {
     const handleClick = async (e) => {
         // console.log(inputText.current.value)
 
+        dispatch(setIsLoading(true))
         e.preventDefault()
         if (!inputText.current.value) return;
 
@@ -57,6 +58,8 @@ const GPTSearchBar = () => {
         // dispatch the data
         dispatch(addGptMovieData({ movieNames: gptMovieNames, movieDetails: movieDetails }))
         dispatch(toggleGptVideoSuggestion())
+
+        dispatch(setIsLoading(false))
     }
 
     const currentLanguage = useSelector(store => store.config.currLanguage)

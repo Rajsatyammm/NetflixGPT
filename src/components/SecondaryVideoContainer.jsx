@@ -12,6 +12,8 @@ function SecondaryVideoContainer() {
 	return (
 		<div className="flex flex-col bg-black text-white">
 			<MovieList title={"Now Playing"} movies={movies?.nowPlayingMovies} />
+			<MovieList title={"Trending Today"} movies={movies?.trendingToday} />
+			<MovieList title={"Trending This Week"} movies={movies?.trendingThisWeek} />
 			<MovieList title={"UpComing Movies"} movies={movies?.upcomingMovies} />
 			<MovieList title={"Top Rated"} movies={movies?.topRatedMovies} />
 			<MovieList title={"Popular"} movies={movies?.popularMovies} />

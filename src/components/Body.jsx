@@ -2,6 +2,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import Browse from "./Browse"
 import Login from "./Login"
 import MovieDetails from "./MovieDetails"
+import ErrorRoute from "./ErrorRoute"
 
 function Body() {
 
@@ -15,10 +16,31 @@ function Body() {
             element: <Browse />,
         },
         {
-            path: '/movie/:id',
+            path: '/browse/movie/:id',
             element: <MovieDetails />
+        },
+        {
+            path: '*',
+            element: <ErrorRoute />
         }
     ])
+
+    // const appRouter = createBrowserRouter([
+    //     {
+    //         path: '/',
+    //         element: <Login />
+    //     },
+    //     {
+    //         path: '/browse',
+    //         element: <Browse />,
+    //         children: [
+    //             {
+    //                 path: 'movie/:id',
+    //                 element: <MovieDetails />
+    //             }
+    //         ]
+    //     },
+    // ])
 
     return (
         <div>
